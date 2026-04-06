@@ -1,0 +1,25 @@
+html {
+    font-family: sans-serif;
+    /* color: hsl(0, 0%, 100%); */
+    color: hsl(0, 0%, 10%);
+}
+h1 {
+    text-align: center;
+}
+
+img {
+    display: flex;
+    max-width: 60vw;
+    height: auto;
+    justify-self: center;
+}
+
+a {
+    display: inline-block;
+    padding: .4rem 1rem;
+    border: 1px solid hsl(0, 0%, 10%);
+    border-radius: 4px;
+    text-decoration: none;
+    color: hsl(0, 0%, 10%);
+    font-size: 1.3rem;
+}

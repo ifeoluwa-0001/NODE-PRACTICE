@@ -1,0 +1,75 @@
+* {
+    box-sizing: border-box;
+}
+
+html, input {
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: hsl(0, 0%, 100%);
+}
+
+form {
+    width: 40vw;
+    display: grid;
+    align-self: center;
+    justify-self: center;
+    padding: .5rem;
+    border-left: 2px solid hsl(0, 0%, 40%);
+    /* border: 1px solid black; */
+}
+
+form:hover {
+    border-left: 2px solid hsl(0, 0%, 0%);
+    transition-duration: 1s;
+}
+
+.input-box {
+    margin-block: 1rem;
+    /* border: 1px solid red; */
+}
+
+form p {
+    padding: 0rem;
+    margin-block: .3rem;
+}
+
+label {
+    color: hsl(0, 0%, 100%);
+}
+
+input {
+    border: 1px solid hsl(0, 0%, 0%);
+    padding: .8rem .5rem;
+    width: 100%;
+    border-radius: 4px;
+    background-color: hsl(0, 0%, 85%);
+}
+
+input::placeholder {
+    font-size: .9rem;
+}
+
+
+
+
+
+input[type="submit"] {
+    padding: .6rem 1rem;
+
+    margin-left: auto;
+    border: none;
+    width: initial;
+
+    background-color: hsl(0, 0%, 0%);
+    color: hsl(0, 0%, 85%);
+
+    font-weight: 700;
+}
+
+.message {
+    font-size: .7rem;
+    color: hsl(0, 100%, 45%);
+}

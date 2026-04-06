@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width ,initial-scale=1.0"/>
+        <title>Sign up</title>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="css/navstyle.css">
+        <link rel="stylesheet" href="css/sign-up.css">
+    </head>
+    <body>
+
+        <nav>
+            <div class="logo">
+                <p class="logo_text">
+                    TestServer_
+                </p>
+            </div>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/order">Order</a></li>
+            </ul>
+        </nav>
+
+        <h1>Sign up</h1>
+
+        <form id="form" action="/submit" method="POST" >
+            
+            <div class="input-box">
+                <b><label for="firstname">Firstname:</label></b>
+                <p class="message err-firstname"></p>
+                <p>
+                    <input type="text" id="firstname" name="firstname" placeholder="firstname" autocomplete="on" autofocus required minlength="1" maxlength="32" />
+                </p>
+            </div>
+            
+            <div class="input-box">
+                <b><label for="lastname">Lastname:</label></b>
+                <p class="message err-lastname"></p>
+                <p>
+                    <input type="text" id="lastname" name="lastname" placeholder="lastname" required minlength="1" maxlength="32" />
+                </p>
+            </div>
+            
+            <div class="input-box">
+                <b><label for="age">Age:</label></b>
+                <p class="message err-age"></p>
+                <p>
+                    <input type="number" id="age" name="age" placeholder="age" required min="1" max="999"/>
+                </p>
+            </div>
+            
+            <div class="input-box">
+                <b><label for="phonenumber">Phone Number:</label></b>
+                <p class="message err-phonenumber"></p>
+                <p>
+                    <input type="tel" name="phone" id="phonenumber" required placeholder="08182247332" minlength="11" maxlength="11" />
+                </p>
+            </div>
+            
+            <div class="input-box">
+                <b><label for="password">Password:</label></b>
+                <p class="message pass"></p>
+                <p>
+                    <input type="password" id="password" name="password" placeholder="password" required minlength="8" maxlength="16" />
+                </p>
+            </div>
+            
+            <input type="submit">
+            
+        </form>
+         <script>
+            document.addEventListener("DOMContentLoaded", function(){
+
+                const form = document.getElementById("form");
+                const _firstname = form.elements['firstname'];
+                const _lastname = form.elements['lastname'];
+                const _age = form.elements['age'];
+                const _tel = form.elements['phonenumber'];
+                const _password = form.elements['password'];
+
+                const msgboxFirstname = document.getElementsByClassName("err-firstname");
+                const msgboxLastname = document.getElementsByClassName("err-lastname");
+                const msgboxAge = document.getElementsByClassName("err-age");
+                const msgboxTel = document.getElementsByClassName("err-phonenumber");
+                const msgboxPassword = document.getElementsByClassName("pass");
+
+                
+
+                form.addEventListener("submit", (e) => {
+                    e.preventDefault();
+
+                    alert(_firstname.value);
+                    validateName(msgboxFirstname, _firstname.value, "firstname");
+                    /* validateName(msgboxLastname, _lastname.innerText, "lastname");
+                    validateAge(msgboxAge, _age.innerText);
+                    validateTel(msgboxTel, _tel.innerText);
+                    validatePassword(msgboxPassword, _password.innerText) */
+
+                });
+
+
+
+
+
+                const isEmpty = function (userInput){
+                    if(!userInput) return true; 
+                };
+
+
+
+                const isAllWhitespace = function (userInput){
+                    for(let char in userInput){
+                        if(userInput[char] !== " ") return false;
+                    };
+
+                    return true;
+                };
+
+
+
+                const allLetters = function (input){
+                    const re = /[A-Za-z]/g;
+
+                    return re.test(input);
+                };
+
+
+
+                const validateName = function (elem, userInputedName, xname){
+                    const messageField = elem/*.parentNode.previousElementSibling*/;
+
+                    if(isEmpty(userInputedName)){
+                        console.log(`your ${xname} is required`);
+                        printMessage(messageField, `your ${xname} is required`);
+                    } else if(isAllWhitespace(userInputedName)) {
+                        console.log("Invalid input");
+                        printMessage(messageField, "Invalid input");
+                    };
+
+                    
+                    if(!allLetters(userInputedName)){
+                        console.log("Invalid input");
+                        printMessage(messageField, "Invalid input");
+                    };
+
+                    elem.innerText = userInputedName.trim();
+                };
+
+
+/* 
+                const validateAge = function (elem, userInputedAge){
+
+                    const messageField = elem;
+
+                    if(isEmpty(userInputedAge)){
+                        console.log("your age is required");
+                        printMessage(messageField, "your age is required");
+                    } else if(isAllWhitespace(userInputedAge)) {
+                        console.log("Invalid input");
+                        printMessage(messageField, "Invalid input");
+                    };
+                    
+                    const re = /[0-9]/g;
+
+                    if(!re.test(userInputedAge)){
+                        console.log("Invalid input");
+                        printMessage(messageField, "Invalid input");
+                    };
+
+                    _age.innerText = userInputedAge.trim();
+
+                };
+
+
+
+                const validateTel = function (elem, userInputedTel){
+
+                    const messageField = elem;
+                    
+                    if(isEmpty(userInputedTel)){
+                        console.log("your phone number is required");
+                        printMessage(messageField, "your phone number is required");
+                    } else if(isAllWhitespace(userInputedTel)) {
+                        console.log("Invalid input");
+                        printMessage(messageField, "Invalid input");
+                    };
+
+                    const re = /[0-9]{11}/g;
+                    if(!re.test(userInputedTel)){
+                        console.log("Invalid input");
+                        printMessage(messageField, "Invalid input");
+                    };
+
+                    if(userInputedTel.length !== 11)
+                        console.log("Invalid input");
+                        printMessage(messageField, "Invalid input");
+
+                    _tel.innerText = userInputedTel;
+
+                };
+
+
+
+                const validatePassword = function (elem, userInputedPassword){
+
+                    const messageField = elem/;
+                    
+                    if(userInputedPassword.length < 8 || userInputedPassword > 16){
+                        console.log("password must be more than 8 characters long and less than 16 characters long");
+                        printMessage(messageField, "password must be more than 8 characters long and less than 16 characters long");
+                    };
+
+                    const re = /[a-zA-z0-9]/g;
+
+                    _password.innerText = userInputedPassword;
+
+                };
+
+                const printMessage = function (elem, message){
+                    elem.value = message;
+                };
+
+*/            });
+        </script>
+
+        <!-- <script src="/public/js/submit.js"></script> -->
+
+    </body>
+</html>

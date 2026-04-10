@@ -27,8 +27,7 @@ form:hover {
 }
 
 .input-box {
-    margin-block: 1rem;
-    /* border: 1px solid red; */
+    margin-block: .5rem;
 }
 
 form p {
@@ -37,16 +36,22 @@ form p {
 }
 
 label {
-    color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 80%);
+    letter-spacing: .05rem;
 }
 
 input {
-    border: 1px solid hsl(0, 0%, 0%);
+    border: none;
+    outline: none;
     padding: .8rem .5rem;
     width: 100%;
     border-radius: 4px;
     background-color: hsl(0, 0%, 85%);
 }
+
+input:focus {
+    border: 2px solid hsl(204, 55%, 45%);
+} 
 
 input::placeholder {
     font-size: .9rem;
@@ -70,6 +75,6 @@ input[type="submit"] {
 }
 
 .message {
-    font-size: .7rem;
-    color: hsl(0, 100%, 45%);
+    font-size: .8rem;
+    color: hsl(0, 100%, 40%);
 }

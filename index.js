@@ -12,7 +12,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
@@ -24,13 +24,15 @@ const verifyJWT = require('./middleware/verifyJWT');
 
 app.use(logRequest);
 app.use('/', require('./routes/root'));
-app.use('/register', require('./routes/api/register'));
-app.use('/auth', require('./routes/api/auth'));
+app.use('/', require('./routes/api/register'));
+app.use('/', require('./routes/api/auth'));
 app.use('/refresh', require('./routes/api/refresh'));
 app.use('/logout', require('./routes/api/logout')); 
 
 app.use(verifyJWT);
+app.use('/account', require('./routes/api/user'));
 app.use('/employees', require('./routes/api/employees'));
+
 
 app.use('/{*splat}', (req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'public', 'pages', 'notfound.html'));

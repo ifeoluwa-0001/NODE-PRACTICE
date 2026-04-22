@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/navstyle.css">
-    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="/css/profile.css">
 </head>
 <body>
     <header>
@@ -42,17 +42,17 @@
 
                     <tr>
                         <td class="iii aaa" >Firstname:</td>
-                        <td class="iii bbb" ></td>
+                        <td class="iii bbb" id="firstname-field" ></td>
                     </tr>
                     <tr>
                         <td class="iii aaa" >Lastname:</td>
-                        <td class="iii bbb" ></td>
+                        <td class="iii bbb" id="lastname-field" ></td>
                     </tr>
                     
                     
                     <tr>
                         <td class="iii aaa" >Date of birth:</td>
-                        <td class="iii bbb" ></td>
+                        <td class="iii bbb" id="dob-field" ></td>
                     </tr>
 
                     <!-- <tr>
@@ -71,12 +71,12 @@
 
                     <tr>
                         <td class="iii aaa" >E-mail:</td>
-                        <td class="iii bbb" ></td>
+                        <td class="iii bbb" id="email-field" ></td>
                     </tr>
 
                     <tr>
                         <td class="iii aaa no-bdr-btm" >Phone:</td>
-                        <td class="iii bbb no-bdr-btm" ></td>
+                        <td class="iii bbb no-bdr-btm" id="phone-field" ></td>
                     </tr>
 
                 </table>
@@ -93,8 +93,34 @@
 
     
 
-    
-
     <footer>&copy; 2003 WEBSITE NAME.Inc</footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const firstname = document.getElementById('firstname-field');
+            const lastname = document.getElementById('lastname-field');
+            const dateofbirth = document.getElementById('dob-field');
+            const email = document.getElementById('email-field');
+            const phone = document.getElementById('phone-field');
+            //const username = document.getElementById('username-field');
+
+            const rawcookie = decodeURIComponent(document.cookie);
+            const userDataindex = rawcookie.indexOf('userData');
+
+            const userDatacookie = rawcookie.slice(userDataindex);
+            const cookieindex = userDatacookie.indexOf('{');
+            const cookie = userDatacookie.slice(cookieindex);
+
+            const user = JSON.parse(cookie);
+
+            firstname.innerText = user.firstname;
+            lastname.innerText = user.lastname;
+            dateofbirth.innerText = user.age;
+            email.innerText = user.email;
+            phone.innerText = user.phone;
+
+
+        });
+    </script>
 </body>
 </html>

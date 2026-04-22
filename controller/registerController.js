@@ -7,54 +7,61 @@ const fsAsync = require("fs/promises");
 const fsSync = require("fs");
 const path = require("path");
 const bcrypt = require("bcrypt");
+const { uniqueUsernameGenerator, Config, adjectives, nouns } = require('unique-username-generator'); 
 
 
 const handleNewUser = async function(req, res){
-    const userName = req.body.userName;
-    const _pwd = req.body.pwd;
+    const firstName = req.body.firstname;
+    const lastName = req.body.lastname;
+    const email = req.body.email;
+    const age = req.body.age;
+    const phone = req.body.phone;
+    const pass = req.body.password;
 
-    if(!userName || !_pwd){
+
+    const config = {
+        dictionaries: [[firstName, lastName]],
+        separator: '_',
+        style: 'lowerCase',
+        randomDigits: 4
+    }
+
+    const userName = uniqueUsernameGenerator(config)
+
+
+    if(!email || !pass){
         //res.status();
-        console.log(`${userName} ${_pwd}`);
-        res.json({"message": "Username and password required."});
+        console.log(`E-mail:\t${email}\nPassowrd:\t${pass}`);
+        res.json({"message": "E-mail and password required."});
     };
-
-    let isDuplicated = false;
-
-    /* fsSync.writeFile(path.join(__dirname, "..", "model", "users.json"), "[]", (err) => {
-        if(err) throw err;
-        console.log(err);
-    });  */
 
     for(user of usersDB.users){
-        if(user.username === userName) isDuplicated = true;
-    };
-
-    if(isDuplicated){
-        return res.sendStatus(409); 
+        if(user.email === email) return res.sendStatus(409); 
     };
     
     try{
-        const pwd = await bcrypt.hash(_pwd, 10);
+        const passw = await bcrypt.hash(pass, 10);
         // why???
         const newUser = usersDB.users.push({
+            "firstname": firstName,
+            "lastname": lastName,
             "username": userName,
+            "email": email,
+            "phone": phone,
+            "age": age,
             "roles": {"user": 2000},
-            "password": pwd
+            "password": passw
         });
 
         await fsAsync.writeFile(path.join(__dirname, "..", "model", "users.json"), JSON.stringify(usersDB.users));
-        console.log(`User ${userName} created`);
-        return res.status(201).json({"Success": `New user ${userName} created`});
+        console.log(`User ${email} created`);
+        return res.status(201).json({"Success": `New user ${email} created`});
     } catch(err){
         console.log(err.message);
         return res.status(500).json({"Error": `${err.message}`});
     };
     
 };
-
-
-
 
 
 

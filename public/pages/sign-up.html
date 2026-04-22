@@ -4,7 +4,7 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width ,initial-scale=1.0"/>
         <title>Sign up</title>
-        <link rel="icon" href="data:,">
+        <!-- <link rel="icon" href="data:,"> -->
         <link rel="stylesheet" href="css/navstyle.css">
         <link rel="stylesheet" href="css/sign-up.css">
     </head>
@@ -24,7 +24,7 @@
 
         <h1>Sign up</h1>
 
-        <form id="form" action="/submit" method="POST" >
+        <form id="form" action="/register" method="POST" >
             
             <div class="input-box">
                 <b><label for="firstname">Firstname:</label></b>
@@ -40,6 +40,14 @@
                     <input type="text" id="lastname" name="lastname" placeholder="lastname" required minlength="2" maxlength="32" />
                 </p>
                 <p class="message err-lastname"></p>
+            </div>
+
+            <div class="input-box">
+                <b><label for="email">E-mail:</label></b>
+                <p>
+                    <input type="mail" id="email" name="email" placeholder="E-mail" required />
+                </p>
+                <p class="message err-mail"></p>
             </div>
             
             <div class="input-box">
@@ -65,7 +73,7 @@
                 </p>
                 <p class="message pass"></p>
             </div>
-            
+            <p><small>Already have an account</small> <a href="/pages/sign-in.html">Sign-in</a></p>
             <input type="submit">
             
         </form>
@@ -303,14 +311,10 @@
 
                 };
 
-
-
-
                 
                 form.addEventListener('submit', (event) => {
                     const isFormValid = (isFirstNameValid && isLastNameValid && isAgeValid && isTelValid && isPassValid)? true : false;
-                    alert(`${isFirstNameValid} - ${isLastNameValid} - ${isAgeValid} - ${isTelValid} - ${isPassValid}`);
-
+                    
                     if(isFormValid){
                         form.submit();
                     } else {

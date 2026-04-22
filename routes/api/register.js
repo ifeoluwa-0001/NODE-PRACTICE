@@ -5,7 +5,7 @@ const path = require("path");
 
 const handleNewUser = require("../../controller/registerController");
 
-router.post("/", handleNewUser);
+router.post("/register", handleNewUser);
 
 
 module.exports = router;

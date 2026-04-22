@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/navstyle.css">
+    <link rel="stylesheet" href="/css/sign-up.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <p class="logo_text">
+                TestServer_
+            </p>
+        </div>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/order">Order</a></li>
+        </ul>
+    </nav>
+
+    <form action="/auth" method="POST" id="form">
+        <h1>Sign-in</h1>
+        <div class="input-box">
+            <b><label for="email">E-mail:</label></b>
+            <p>
+                <input type="mail" id="email" name="email" placeholder="E-mail" required />
+            </p>
+            <p class="message err-mail"></p>
+        </div>
+
+        <div class="input-box">
+            <b><label for="password">Password:</label></b>
+            <p>
+                <input type="password" id="password" name="password" placeholder="password" required minlength="8" maxlength="16" />
+            </p>
+            <p class="message pass"></p>
+        </div>
+        
+        <input type="submit">
+        <script>
+            /* document.addEventListener('DOMContentLoaded', function() {
+                const form = document.querySelector('#form');
+                const email = form['email'];
+                const password = form['password'];
+
+                
+                form.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    const formData = new FormData(form);
+                    const formObject = Object.fromEntries(formData.entries());
+
+                    const response = await fetch('/auth', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formObject)
+                    });
+
+                    const accesstoken = await response.json();
+
+                    localStorage.setItem('accesstoken', JSON.stringify(accesstoken));
+
+                    window.location.replace('http://127.0.0.1:3500/profile');
+                }); 
+
+            })*/
+        </script>
+    </form>
+</body>
+</html>

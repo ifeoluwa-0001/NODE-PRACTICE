@@ -25,10 +25,6 @@ router.get('/order/:id', (req, res, next) => {
 });
 */
 
-router.get('/order', (req,res) => {
-    res.sendFile(path.join(pagesPath, 'order.html'));
-});
-
 router.get('/oldpage', (req, res) => {
     res.sendFile(path.join(pagesPath, 'oldpage.html'));
 });
@@ -37,14 +33,10 @@ router.get('/sign-up', (req, res) => {
     res.sendFile(path.join(pagesPath, 'sign-up.html'));
 });
 
-router.get("/user-profile", (req, res) => {
-    res.sendFile(path.join(pagesPath, 'profile.html'));
+router.get('/sign-in', (req, res) => {
+    res.sendFile(path.join(pagesPath, 'sign-in.html'));
 });
 
-router.post('/submit',(req, res) => {
-    console.log(req.body);
-    res.json(req.body);
-});
 
 module.exports = router;
 
